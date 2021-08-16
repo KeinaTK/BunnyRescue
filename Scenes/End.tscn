@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Fonts/Space Mono Nerd Font Complete.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/PNG/Background/bg_layer1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/PNG/Background/bg_layer3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/PNG/Background/bg_layer4.png" type="Texture" id=4]
+[ext_resource path="res://Assets/PNG/Background/bg_layer2.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 72
+outline_size = 5
+outline_color = Color( 0.337255, 0.337255, 0.337255, 1 )
+font_data = ExtResource( 1 )
+
+[node name="End" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 2048.0
+margin_bottom = 2048.0
+texture = ExtResource( 2 )
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_right = 2048.0
+margin_bottom = 2048.0
+texture = ExtResource( 5 )
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+margin_right = 2048.0
+margin_bottom = 2048.0
+texture = ExtResource( 3 )
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+margin_right = 2048.0
+margin_bottom = 2048.0
+texture = ExtResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer"]
+margin_top = 906.0
+margin_right = 1080.0
+margin_bottom = 1013.0
+custom_fonts/font = SubResource( 1 )
+text = "Parabéns, você ganhou!"
+align = 1
+valign = 1

@@ -1,0 +1,127 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/TileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/PNG/Background/bg_layer4.png" type="Texture" id=3]
+[ext_resource path="res://Assets/PNG/Background/bg_layer2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/PNG/Background/bg_layer3.png" type="Texture" id=5]
+[ext_resource path="res://Assets/PNG/Background/bg_layer1.png" type="Texture" id=6]
+[ext_resource path="res://Prefabs/Coins/Coins.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Prefabs/HUD.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Prefabs/SpikeMan.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Prefabs/Piterocoptero.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Prefabs/PickUp.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Prefabs/NimbusMalignus.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Prefabs/CoelhoMarrom.tscn" type="PackedScene" id=13]
+
+[node name="World" type="Node2D"]
+
+[node name="HUDHolder" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="HUDHolder" instance=ExtResource( 8 )]
+
+[node name="NimbusMalignus" parent="HUDHolder" instance=ExtResource( 12 )]
+camera_path = NodePath("../../Player/Camera2D")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Layer1" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( -10.9775, -205.535 )
+motion_mirroring = Vector2( 1080, 1920 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="bg_layer1" type="Sprite" parent="ParallaxBackground/Layer1"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+
+[node name="Layer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 0.005 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="bg_layer2" type="Sprite" parent="ParallaxBackground/Layer2"]
+texture = ExtResource( 4 )
+
+[node name="Layer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 0.15 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="bg_layer3" type="Sprite" parent="ParallaxBackground/Layer3"]
+texture = ExtResource( 5 )
+
+[node name="Layer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 0.35 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="bg_layer4" type="Sprite" parent="ParallaxBackground/Layer4"]
+texture = ExtResource( 3 )
+
+[node name="TileMap" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -1 )
+tile_data = PoolIntArray( -10027007, 16, 0, -9764859, 16, 0, -9437175, 14, 0, -7143421, 16, 0, -6750200, 14, 0, -6422528, 16, 0, -6094837, 16, 0, -5767166, 16, 0, -5505013, 16, 0, -5111801, 16, 0, -4784117, 14, 0, -4587518, 16, 0, -4325365, 16, 0, -3997694, 16, 0, -3670005, 16, 0, -3211261, 16, 0, -2818037, 14, 0, -2359290, 16, 0, -1900543, 16, 0, -1900532, 16, 0, -1572859, 14, 0, 1638405, 14, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 491.933, 1498.78 )
+
+[node name="Coins" parent="." instance=ExtResource( 7 )]
+tile_data = PoolIntArray( -5373949, 1, 0, -5242874, 2, 0, -5242873, 2, 0, -5242872, 2, 0, -5242871, 2, 0, -5242870, 2, 0, -4980735, 0, 0, -4718583, 0, 0, -4456446, 0, 0, -4325372, 1, 0, -4325371, 1, 0, -4259835, 1, 0, -4259834, 1, 0, -4194298, 1, 0, -4194297, 1, 0, -3735550, 0, 0, -3735544, 1, 0, -3735543, 1, 0, -3735542, 1, 0, -3735541, 1, 0, -3735540, 1, 0, -3670014, 0, 0, -3604478, 0, 0, -3538935, 0, 0, -3473399, 0, 0, -3407863, 0, 0, -3276798, 0, 0, -3211262, 0, 0, -3145726, 0, 0, -3014652, 0, 0, -3014651, 0, 0, -2949115, 0, 0, -2949114, 0, 0, -2883578, 0, 0, -2883577, 0, 0, -2686968, 1, 0, -2686967, 1, 0, -2686966, 1, 0, -2686965, 1, 0, -2621432, 1, 0, -2621431, 1, 0, -2621430, 1, 0, -2621429, 1, 0, -2424827, 2, 0, -2424826, 2, 0, -2359291, 2, 0, -2359290, 2, 0, -2359289, 2, 0, -2293754, 2, 0, -2293753, 2, 0, -2293752, 2, 0, -2228217, 2, 0, -2228216, 2, 0, -2031611, 0, 0, -1966075, 0, 0, -1966074, 0, 0, -1900538, 0, 0, -1703933, 0, 0, -1703929, 0, 0, -1638398, 0, 0, -1638392, 0, 0, -1572863, 0, 0, -1572855, 0, 0 )
+
+[node name="PickUp5" parent="." instance=ExtResource( 11 )]
+position = Vector2( 492.892, 1258.25 )
+type = "jetpack"
+
+[node name="PickUp4" parent="." instance=ExtResource( 11 )]
+position = Vector2( 294.507, -3233.2 )
+type = "bubble"
+
+[node name="PickUp6" parent="." instance=ExtResource( 11 )]
+position = Vector2( 543.972, -5065.13 )
+type = "bubble"
+
+[node name="PickUp7" parent="." instance=ExtResource( 11 )]
+position = Vector2( 551.964, -7516.87 )
+type = "jetpack"
+
+[node name="Piterocoptero" parent="." instance=ExtResource( 10 )]
+position = Vector2( 550.34, -2822.1 )
+
+[node name="Piterocoptero2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 565.468, -4199.86 )
+
+[node name="Piterocoptero3" parent="." instance=ExtResource( 10 )]
+position = Vector2( 606.741, -6025.37 )
+
+[node name="Piterocoptero4" parent="." instance=ExtResource( 10 )]
+position = Vector2( 556.344, -7363.41 )
+
+[node name="SpikeMan2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 506.312, -1616.95 )
+
+[node name="SpikeMan3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 926.572, -4761.66 )
+
+[node name="SpikeMan4" parent="." instance=ExtResource( 9 )]
+position = Vector2( 833.338, -5454.62 )
+
+[node name="Sprite" parent="." instance=ExtResource( 13 )]
+position = Vector2( 166.31, -9892.9 )
+
+[node name="EndLevel" parent="Sprite" index="0"]
+next_level = "res://Scenes/End.tscn"
+
+[connection signal="lifeChange" from="Player" to="HUDHolder/HUD" method="_on_Player_lifeChange"]
+[connection signal="pickCoin" from="Player" to="HUDHolder/HUD" method="_on_Player_pickCoin"]
+
+[editable path="Player"]
+[editable path="Sprite"]

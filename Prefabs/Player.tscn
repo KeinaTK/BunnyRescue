@@ -1,0 +1,160 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Prefabs/PlayerSprite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/CoinPick.gd" type="Script" id=3]
+[ext_resource path="res://Assets/PNG/Particles/flame.png" type="Texture" id=4]
+[ext_resource path="res://Assets/PNG/Items/jetpack.png" type="Texture" id=5]
+[ext_resource path="res://Scripts/Flames.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Particles/fire_01.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Particles/smoke_07.png" type="Texture" id=8]
+[ext_resource path="res://Prefabs/SmokeParticles.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/PNG/Items/bubble.png" type="Texture" id=10]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.390947, 1 )
+colors = PoolColorArray( 0.983398, 0.558924, 0, 1, 0.607843, 0.431373, 0, 1, 0.372549, 0.352941, 0, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+lifetime_randomness = 0.31
+emission_shape = 2
+emission_box_extents = Vector3( 40, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 13.53
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 464.54
+initial_velocity_random = 0.11
+angular_velocity = 480.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 360.0
+angle_random = 1.0
+scale = 0.2
+color_ramp = SubResource( 3 )
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.283951, 0.897119, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 0.683486, 0.683486, 0.683486, 1, 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0 ), 0.0, 3.27004, 0, 0, Vector2( 0.996241, 0.861364 ), -0.853476, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 15.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.1
+scale_random = 0.3
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 6 )
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 55.1563
+height = 51.4608
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 20.0
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="JetPack" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="JetPack"]
+visible = false
+texture = ExtResource( 5 )
+
+[node name="Flames" type="Node2D" parent="JetPack/Sprite"]
+show_behind_parent = true
+script = ExtResource( 6 )
+
+[node name="flame" type="Sprite" parent="JetPack/Sprite/Flames"]
+show_behind_parent = true
+position = Vector2( -30, 108 )
+texture = ExtResource( 4 )
+
+[node name="flame2" type="Sprite" parent="JetPack/Sprite/Flames"]
+position = Vector2( 30, 108 )
+texture = ExtResource( 4 )
+
+[node name="FlameParticles" type="Particles2D" parent="JetPack"]
+show_behind_parent = true
+material = SubResource( 1 )
+position = Vector2( 0, 98 )
+emitting = false
+amount = 96
+explosiveness = 0.02
+local_coords = false
+process_material = SubResource( 4 )
+texture = ExtResource( 7 )
+
+[node name="SmokeParticles" type="Particles2D" parent="JetPack/FlameParticles"]
+show_behind_parent = true
+emitting = false
+amount = 32
+lifetime = 3.0
+local_coords = false
+process_material = SubResource( 9 )
+texture = ExtResource( 8 )
+
+[node name="PlayerSprite" parent="." instance=ExtResource( 1 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 16 )
+shape = SubResource( 10 )
+
+[node name="LeftContainer" type="Node2D" parent="."]
+position = Vector2( -1080, 0 )
+
+[node name="Left" parent="LeftContainer" instance=ExtResource( 1 )]
+
+[node name="RightContainer" type="Node2D" parent="."]
+position = Vector2( 1080, 0 )
+
+[node name="Right" parent="RightContainer" instance=ExtResource( 1 )]
+position = Vector2( 0, -10 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_right = 1080
+limit_bottom = 1920
+smoothing_enabled = true
+
+[node name="Feet" type="Position2D" parent="."]
+position = Vector2( 0, 96 )
+
+[node name="SmokeParticles" parent="Feet" instance=ExtResource( 9 )]
+
+[node name="CoinPick" type="Area2D" parent="."]
+position = Vector2( 0, 16 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinPick"]
+shape = SubResource( 11 )
+
+[node name="Bubble" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 10 )
+
+[connection signal="pickCoin" from="CoinPick" to="." method="_on_CoinPick_pickCoin"]

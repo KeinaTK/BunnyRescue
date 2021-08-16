@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/HitBox.gd" type="Script" id=1]
+[ext_resource path="res://Assets/PNG/Enemies/flyMan_jump.png" type="Texture" id=2]
+[ext_resource path="res://Assets/PNG/Enemies/flyMan_fly.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Piterocoptero.gd" type="Script" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Down",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 40.0
+height = 2.0
+
+[node name="Piterocoptero" type="KinematicBody2D"]
+script = ExtResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Up"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 17 )
+shape = SubResource( 2 )
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitBox"]
+polygon = PoolVector2Array( -45, 52, -45, 30, -40, -16, -9, -39, -61, -56, 0, -69, 61, -56, 61, -56, 9, -39, 40, -16, 45, 32, 45, 52, 0, 64 )
+
+[connection signal="body_entered" from="HitBox" to="HitBox" method="_on_HitBox_body_entered"]
